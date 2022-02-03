@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { TransactionsContext } from "../TransactionsContext";
+import { TransactionsContext } from "../../TransactionsContext";
 
 import axios from "axios";
 

@@ -3,7 +3,7 @@ import { TransactionsContext } from "../TransactionsContext";
 import FinanceLine from "../components/FinanceLine";
 // import TransactionsAdd from "../components/TransactionAdd";
 
-import { NewTransactionModal } from "../components/NewTransactionModal";
+import { NewTransactionModal } from "../components/Transactions/NewTransactionModal";
 
 function Finances() {
   const transactions = useContext(TransactionsContext);

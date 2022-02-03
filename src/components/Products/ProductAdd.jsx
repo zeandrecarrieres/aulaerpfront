@@ -1,44 +1,46 @@
 import React, { useState} from "react";
+import {useForm} from "react-hook-form"
 import axios from "axios";
 
 
 
 function ProductAdd({onProductModalClose}) {
   
+  const { register, handleSubmit } = useForm();
+  // const [code, setCode] = useState("");
+  // // const [category, setCategory] = useState("");
 
-  const [code, setCode] = useState("");
-  const [category, setCategory] = useState("");
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [qtde, setQtde] = useState("");
-  const [purchase_price, setPurchase_price] = useState("");
-  const [reference_price, setReference_price] = useState("");
+  // const [name, setName] = useState("");
+  // const [description, setDescription] = useState("");
+  // const [qtde, setQtde] = useState("");
+  // const [purchase_price, setPurchase_price] = useState("");
+  // const [reference_price, setReference_price] = useState("");
 
-  const registerProduct = (e) => {
-    e.preventDefault();
+  const registerProduct = ({ name, description, category }) => {
+    // e.preventDefault();
     axios({
       method: "post",
       url: `${process.env.REACT_APP_URL_API}/products`,
       data: {
-        code,
+        code: "",
         category,
         name,
         description,
-        qtde,
-        purchase_price,
-        reference_price,
+        qtde: "",
+        purchase_price: "",
+        reference_price: "",
       },
     })
       .then(function (reponse) {
         //On traite la suite une fois la réponse obtenue
         alert("Produto Cadastrado com sucesso!");
-        setCode("");
-        setCategory("");
-        setName("");
-        setDescription("");
-        setQtde("");
-        setPurchase_price("");
-        setReference_price("");
+        // setCode("");
+        // setCategory("");
+        // setName("");
+        // setDescription("");
+        // setQtde("");
+        // setPurchase_price("");
+        // setReference_price("");
         onProductModalClose()
 
         
@@ -57,7 +59,7 @@ function ProductAdd({onProductModalClose}) {
         <form
           action="#"
           className="grid-cols-2 grid-template-columns: repeat(2, minmax(0, 1fr)); items-center justify-center"
-          onSubmit={registerProduct}
+          onSubmit={handleSubmit(registerProduct)}
         >
           <div className="text-xl mb-8 text-gray-500">
             Inclusão de Produtos
@@ -102,10 +104,9 @@ function ProductAdd({onProductModalClose}) {
                 Tipo
               </label>
               <select
-                id="options-select"
                 className="border py-2 px-3 text-grey-darkest h-10 my-2 shadow-sm bg-opacity-30 px-2 text-sm border-solid border-gray-300"
                 placeholder="category"
-                onChange={(e) => setCategory(e.target.value)}
+                {...register('category')}
               >
                 <option value="initial" className="flex flex-col mb-4">
                   -- Selecione uma opção --
@@ -208,11 +209,9 @@ function ProductAdd({onProductModalClose}) {
             </label>
             <input
               type="text"
-              id="name"
-              name="name"
-              value={name}
+             
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              onChange={(e) => setName(e.target.value)}
+              {...register ('name', { required: true, maxLength: 30 })}
             />
           </div>
           <div className="flex flex-col mb-4">
@@ -224,11 +223,8 @@ function ProductAdd({onProductModalClose}) {
             </label>
             <input
               type="text"
-              id="description"
-              name="description"
-              value={description}
               className="border py-2 px-3 text-grey-darkest h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              onChange={(e) => setDescription(e.target.value)}
+              {...register('description')}
             />
           </div>
 

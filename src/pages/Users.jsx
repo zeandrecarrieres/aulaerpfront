@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import UserLine from "../components/UserLine";
-import { NewUserModal } from "../components/NewUserModal";
+import UserLine from "../components/Users/UserLine";
+import { NewUserModal } from "../components/Users/NewUserModal";
 
 function Users() {
   const [users, setUsers] = useState([]);

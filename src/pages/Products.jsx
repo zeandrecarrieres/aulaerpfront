@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import ProductLine from "../components/ProductLine";
-import { NewProductModal } from "../components/NewProductModal";
+import ProductLine from "../components/Products/ProductLine";
+import { NewProductModal } from "../components/Products/NewProductModal";
 
 function Products() {
   const [products, setProducts] = useState([]);

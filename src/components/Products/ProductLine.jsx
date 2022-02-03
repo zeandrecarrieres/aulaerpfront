@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { Delete, Edit } from "@material-ui/icons";
-import { EditProductModal } from "../components/EditProductModal";
-import { TransactionsContext } from "../TransactionsContext";
-import { getEstoque } from "../helpers/getEstoque.js"
+import { EditProductModal } from "./EditProductModal";
+import { TransactionsContext } from "../../TransactionsContext";
+import { getEstoque } from "../../helpers/getEstoque.js"
 
 function ProductsLine({ products }) {
   const { transactions } = useContext(TransactionsContext);

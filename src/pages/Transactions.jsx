@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import { TransactionsContext } from "../TransactionsContext";
-import TransactionLine from "../components/TransactionLine";
+import TransactionLine from "../components/Transactions/TransactionLine";
 // import TransactionsAdd from "../components/TransactionAdd";
 import { getCurrentMonth, filterListByMonth } from "../helpers/dateFilter";
 
 
 
-import { NewTransactionModal } from "../components/NewTransactionModal";
+import { NewTransactionModal } from "../components/Transactions/NewTransactionModal";
 
 function Transactions() {
   const { transactions, transaction } = useContext(TransactionsContext);

@@ -1,25 +1,28 @@
 import React, { useState } from "react";
+import {useForm} from "react-hook-form"
 import axios from "axios";
 
 function SuppliersAdd({onSupplierModalClose}) {
-  const [type, setType] = useState("");
-  const [category, setCategory] = useState("");
-  // const [nick, setNick] = useState("");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [telephone, setTelephone] = useState("");
-  const [address, setAddress] = useState("");
-  const [complement, setComplement] = useState("");
-  const [district, setDistrict] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [postal, setPostal] = useState("");
-  const [cnp, setCnp] = useState("");
-  const [inscription, setInscription] = useState("");
-  const [site, setSite] = useState("");
 
-  const registerSupplier = (e) => {
-    e.preventDefault();
+  const { register, handleSubmit } = useForm()
+  // const [type, setType] = useState("");
+  // const [category, setCategory] = useState("");
+  // // const [nick, setNick] = useState("");
+  // const [name, setName] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [telephone, setTelephone] = useState("");
+  // const [address, setAddress] = useState("");
+  // const [complement, setComplement] = useState("");
+  // const [district, setDistrict] = useState("");
+  // const [city, setCity] = useState("");
+  // const [state, setState] = useState("");
+  // const [postal, setPostal] = useState("");
+  // const [cnp, setCnp] = useState("");
+  // const [inscription, setInscription] = useState("");
+  // const [site, setSite] = useState("");
+
+  const registerSupplier = ({ type, category, name, email, telephone,address, complement, district, city, state, postal, cnp, inscription, site}) => {
+    // e.preventDefault();
     axios({
       method: "post",
       url: `${process.env.REACT_APP_URL_API}/suppliers`,
@@ -45,21 +48,21 @@ function SuppliersAdd({onSupplierModalClose}) {
         //On traite la suite une fois la réponse obtenue
         alert("Fornecedor Cadastrado com sucesso!");
 
-        setType('')
-        setCategory('')
-        setName('')
-        setEmail('')
-        setTelephone('')
-        setAddress('')
-        setComplement('')
-        setDistrict('')
-        setCity('')
-        setState('')
-        setPostal('')
-        setCnp('')
-        setEmail('')
-        setInscription('')
-        setSite('')
+        // setType('')
+        // setCategory('')
+        // setName('')
+        // setEmail('')
+        // setTelephone('')
+        // setAddress('')
+        // setComplement('')
+        // setDistrict('')
+        // setCity('')
+        // setState('')
+        // setPostal('')
+        // setCnp('')
+        // setEmail('')
+        // setInscription('')
+        // setSite('')
 
 
         onSupplierModalClose()
@@ -79,7 +82,7 @@ function SuppliersAdd({onSupplierModalClose}) {
         <form
           action="#"
           className="grid-cols-2 grid-template-columns: repeat(2, minmax(0, 1fr)); items-center justify-center"
-          onSubmit={registerSupplier}
+          onSubmit={handleSubmit(registerSupplier)}
         >
           <div className="text-xl mb-8 text-gray-500">
             Inclusão de Fornecedores
@@ -111,24 +114,23 @@ function SuppliersAdd({onSupplierModalClose}) {
                 Categoria
               </label>
               <select
-                id="options-select"
-                className="border py-2 px-3 text-grey-darkest h-10 my-2 shadow-sm bg-opacity-30 px-2 text-sm border-solid border-gray-300"
+               className="border py-2 px-3 text-grey-darkest h-10 my-2 shadow-sm bg-opacity-30 px-2 text-sm border-solid border-gray-300"
                 placeholder="category"
-                onChange={(e) => setCategory(e.target.value)}
+                {...register('category')}
               >
                 <option value="" className="flex flex-col mb-4">
                   -- Selecione uma opção --
                 </option>
                 <option
                   value="Fisica"
-                  // name="Física"
+                  name="Física"
                   className="flex flex-col mb-4"
                 >
                   Física
                 </option>
                 <option
                   value="Juridica"
-                  // name="Jurídica"
+                  name="Jurídica"
                   className="flex flex-col mb-4"
                 >
                   Jurídica
@@ -142,15 +144,15 @@ function SuppliersAdd({onSupplierModalClose}) {
               htmlFor="nick"
               className="font-bold text-sm text-gray-500"
             >
-              {category === "Fisica" ? "NOME" : "Razão Social"}
+              {/* verificar antes era sem aspsas */}
+              {'category' === "Fisica" ? "NOME" : "Razão Social"} 
             </label>
             <input
               type="text"
-              id="name"
-              name="name"
-              value={name}
+              //antes sem aspas
+              // value={'name'}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              onChange={(e) => setName(e.target.value)}
+             {...register('name')}
             />
           </div>
 
@@ -163,11 +165,10 @@ function SuppliersAdd({onSupplierModalClose}) {
             </label>
             <input
               type="text"
-              id="email"
-              name="email"
-              value={email}
+            //  antes sem aspas
+              // value={'email'}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              onChange={(e) => setEmail(e.target.value)}
+              {...register('email')}
             />
           </div>
 
@@ -180,11 +181,9 @@ function SuppliersAdd({onSupplierModalClose}) {
             </label>
             <input
               type="text"
-              id="telephone"
-              name="telephone"
-              value={telephone}
+              // value={'telephone'}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              onChange={(e) => setTelephone(e.target.value)}
+              {...register('telephone')}
             />
           </div>
 
@@ -197,11 +196,10 @@ function SuppliersAdd({onSupplierModalClose}) {
             </label>
             <input
               type="text"
-              id="address"
-              name="address"
-              value={address}
+              
+              // value={'address'}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              onChange={(e) => setAddress(e.target.value)}
+              {...register('address')}
             />
           </div>
 
@@ -214,11 +212,10 @@ function SuppliersAdd({onSupplierModalClose}) {
             </label>
             <input
               type="text"
-              id="complement"
-              name="complement"
-              value={complement}
+              
+              // value={'complement'}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              onChange={(e) => setComplement(e.target.value)}
+              {...register('complement')}
             />
           </div>
 
@@ -231,11 +228,10 @@ function SuppliersAdd({onSupplierModalClose}) {
             </label>
             <input
               type="text"
-              id="district"
-              name="district"
-              value={district}
+             
+              // value={'district'}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              onChange={(e) => setDistrict(e.target.value)}
+              {...register('district')}
             />
           </div>
 
@@ -248,11 +244,10 @@ function SuppliersAdd({onSupplierModalClose}) {
             </label>
             <input
               type="text"
-              id="city"
-              name="city"
-              value={city}
+              
+              // value={'city'}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              onChange={(e) => setCity(e.target.value)}
+              {...register('city')}
             />
           </div>
 
@@ -266,11 +261,10 @@ function SuppliersAdd({onSupplierModalClose}) {
               </label>
               <input
                 type="text"
-                id="state"
-                name="state"
-                value={state}
+               
+                // value={'state'}
                 className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-                onChange={(e) => setState(e.target.value)}
+                {...register('state')}
               />
             </div>
 
@@ -283,11 +277,10 @@ function SuppliersAdd({onSupplierModalClose}) {
               </label>
               <input
                 type="text"
-                id="postal"
-                name="postal"
-                value={postal}
+              
+                // value={'postal'}
                 className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-                onChange={(e) => setPostal(e.target.value)}
+                {...register('postal')}
               />
             </div>
           </div>
@@ -297,19 +290,18 @@ function SuppliersAdd({onSupplierModalClose}) {
               htmlFor="cnp"
               className="font-bold text-sm text-gray-500"
             >
-              {category === "Fisica" ? "CPF" : "CNPJ"}
+              {'category' === "Fisica" ? "CPF" : "CNPJ"}
             </label>
             <input
               type="text"
-              id="cnp"
-              name="cnp"
-              value={cnp}
+             
+              // value={'cnp'}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              onChange={(e) => setCnp(e.target.value)}
+              {...register('cnp')}
             />
           </div>
 
-          {category === "Juridica" ? (
+          {'category' === "Juridica" ? (
             <div className="flex flex-col mb-4">
               <label
                 htmlFor="inscription"
@@ -319,11 +311,10 @@ function SuppliersAdd({onSupplierModalClose}) {
               </label>
               <input
                 type="text"
-                id="inscription"
-                name="inscription"
-                value={inscription}
+              
+                // value={'inscription'}
                 className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-                onChange={(e) => setInscription(e.target.value)}
+                {...register('inscription')}
               />
             </div>
           ) : null}
@@ -337,11 +328,10 @@ function SuppliersAdd({onSupplierModalClose}) {
             </label>
             <input
               type="text"
-              id="site"
-              name="site"
-              value={site}
+            
+              // value={'site'}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              onChange={(e) => setSite(e.target.value)}
+              {...register('site')}
             />
           </div>
 

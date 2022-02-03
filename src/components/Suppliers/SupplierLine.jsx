@@ -1,22 +1,10 @@
 import { useState } from "react";
 import { Delete, Edit } from "@material-ui/icons";
-import { EditSupplierModal } from "../components/EditSupplierModal";
+import { EditSupplierModal } from "../Suppliers/EditSupplierModal";
+import { useModal } from "../../hooks/useModal"
 
 function SuppliersLine({ suppliers }) {
-  const [modalEditSupplierIsOpen, setModalEditSupplierIsOpen] = useState(false);
-
-  function openEditSupplierModal() {
-    setModalEditSupplierIsOpen(true);
-  }
-
-  function closeEditSupplierModal() {
-    setModalEditSupplierIsOpen(false);
-  }
-  
-  const openModalWithId = (id) => {
-    console.log(suppliers._id);
-    openEditSupplierModal();
-  };
+  const { isModalOpen, openModal, closeModal } = useModal();
   
   const deleteSupplier = async () => {
     await fetch(`${process.env.REACT_APP_URL_API}/suppliers/` + suppliers._id, {
@@ -24,7 +12,6 @@ function SuppliersLine({ suppliers }) {
     });
     alert("Fornecedor deletado com sucesso!");
   };
-
 
   return (
     <>
@@ -40,7 +27,7 @@ function SuppliersLine({ suppliers }) {
             <td className="w-2/12 px-12  text-sm">{suppliers.email}</td>
             <td className="w-2/12 px-12  text-sm">{suppliers.telephone}</td>
             <td className="w-1/12 px-12  text-sm text-yellow-700 hover:text-yellow-500">
-              <button onClick={(e) => openModalWithId(suppliers._id)}>
+              <button onClick={openModal}>
                 <Edit />
               </button>
             </td>
@@ -54,8 +41,8 @@ function SuppliersLine({ suppliers }) {
       </table>
 
       <EditSupplierModal
-        isOpen={modalEditSupplierIsOpen}
-        onRequestClose={closeEditSupplierModal}
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
         id={suppliers._id}
       />
     </>

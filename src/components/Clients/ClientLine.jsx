@@ -1,6 +1,6 @@
 import {useState} from "react";
 import { Delete, Edit } from "@material-ui/icons";
-import { EditClientModal } from "../components/EditClientModal";
+import { EditClientModal } from "./EditClientModal";
 
 function ClientsLine({ clients }) {
   const [modalEditClientIsOpen, setModalEditClientIsOpen] = useState(false);

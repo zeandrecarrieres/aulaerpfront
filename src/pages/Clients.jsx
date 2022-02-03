@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import ClientLine from "../components/ClientLine";
-import { NewClientModal } from "../components/NewClientModal";
+import ClientLine from "../components/Clients/ClientLine";
+import { NewClientModal } from "../components/Clients/NewClientModal";
 
 function Clients() {
   const [clients, setClients] = useState([]);

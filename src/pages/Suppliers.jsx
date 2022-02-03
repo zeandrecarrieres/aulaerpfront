@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import SupplierLine from "../components/SupplierLine";
-import { NewSupplierModal } from "../components/NewSupplierModal";
+import SupplierLine from "../components/Suppliers/SupplierLine";
+import { NewSupplierModal } from "../components/Suppliers/NewSupplierModal";
 // import { MicNone } from "@material-ui/icons";
 
 function Suppliers() {

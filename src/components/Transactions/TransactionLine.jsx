@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react";
 import { Delete, Edit } from "@material-ui/icons";
-import { EditTransactionModal } from "../components/EditTransactionModal";
+import { EditTransactionModal } from "../Transactions/EditTransactionModal";
 
 function TransactionsLine({ transactions, totalValue}) {
  
