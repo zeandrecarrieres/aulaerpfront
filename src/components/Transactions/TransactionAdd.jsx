@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import { TransactionsContext } from "../../TransactionsContext";
+import { buscaUrl } from "../../service/buscaUrl.js"
+import { ProductsContext } from "../../contexts/ProductsContext"
 
 import axios from "axios";
 
 function TransactionAdd({ onTransactionModalClose }) {
   const [add, setAdd] = useState(0);
+
+    const { products } = useContext(ProductsContext)
 
   const [date, setDate] = useState("");
   const [type, setType] = useState("");
@@ -35,34 +39,20 @@ function TransactionAdd({ onTransactionModalClose }) {
   const { setTransaction } = useContext(TransactionsContext);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_URL_API}/clients`)
-      .then((response) => response.json())
-      .then((data) => setClientOptions(data))
-      .catch((error) => console.log(error));
+    buscaUrl(`${process.env.REACT_APP_URL_API}/clients`, setClientOptions)
   }, []);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_URL_API}/users`)
-      .then((response) => response.json())
-      .then((data) => setUserOptions(data))
-      .catch((error) => console.log(error));
+    buscaUrl(`${process.env.REACT_APP_URL_API}/users`, setUserOptions)
   }, []);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_URL_API}/suppliers`)
-      .then((response) => response.json())
-      .then((data) => setSupplierOptions(data))
-      .catch((error) => console.log(error));
+    buscaUrl(`${process.env.REACT_APP_URL_API}/suppliers`, setSupplierOptions)
   }, []);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_URL_API}/products`)
-      .then((response) => response.json())
-      .then((data) => setProductOptions(data))
-      .catch((error) => console.log(error));
+    setProductOptions(products);
   }, []);
-
-  
 
   const includeItem = () => {
     let listItem = [product, qtde, reference_price, discount, total_price];

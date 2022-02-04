@@ -1,76 +1,19 @@
-import React, { useState, useEffect} from "react";
-import axios from "axios";
+import { useProduct } from "./ProductEdit/useProduct"
 
-
-function ProductEdit({onEditProductModalClose, id}) {
+function ProductEdit(props) {
   // const [products, setProducts] = useState([]);
-  const [code, setCode] = useState("");
-  const [category, setCategory] = useState("");
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [qtde, setQtde] = useState("");
-  const [purchase_price, setPurchase_price] = useState("");
-  const [reference_price, setReference_price] = useState("");
+  //const [code, setCode] = useState("");
+  //const [category, setCategory] = useState("");
+  //const [name, setName] = useState("");
+  //const [description, setDescription] = useState("");
+  //const [qtde, setQtde] = useState("");
+  //const [purchase_price, setPurchase_price] = useState("");
+  //const [reference_price, setReference_price] = useState("");
   // const [selectedOption,setSelectedOption] = useState("")
 
+  const { handleInput, product, registerProduct } = useProduct(props);
 
-
-  useEffect(() => {
-     fetch(`${process.env.REACT_APP_URL_API}/products/` + id) //trocar o id por: products._id
-    .then((response) => response.json())
-    .then((data) => {
-      setCode(data.code)
-      setCategory(data.category)
-      setDescription(data.description)
-      setName(data.name)
-      setPurchase_price(data.purchase_price)
-      setQtde(data.qtde)
-      setReference_price(data.reference_price)
-      // setSelectedOption(category)
-      console.log('teste',id, 'fim')
-     
-    });
-
-
-
-  }, [id])
-
-
-  const registerProduct = (e) => {
-    e.preventDefault();
-    axios({
-      method: "put",
-      url: `${process.env.REACT_APP_URL_API}/products/`+ id,
-      data: {
-        code,
-        category,
-        name,
-        description,
-        qtde,
-        purchase_price,
-        reference_price,
-      },
-    })
-      .then(function (reponse) {
-        //On traite la suite une fois la réponse obtenue
-        alert("Produto Atualizado com sucesso!");
-        setCode("");
-        setCategory("");
-        setName("");
-        setDescription("");
-        setQtde("");
-        setPurchase_price("");
-        setReference_price("");
-
-        onEditProductModalClose()
-      
-      })
-      .catch(function (erreur) {
-        //On traite ici les erreurs éventuellement survenues
-        alert("Preencha todos os campos!");
-        console.log(erreur);
-      });
-  };
+  const { name, description, category } = product;
 
   return (
     <div>
@@ -127,7 +70,7 @@ function ProductEdit({onEditProductModalClose, id}) {
                 className="border py-2 px-3 text-grey-darkest h-10 my-2 shadow-sm bg-opacity-30 px-2 text-sm border-solid border-gray-300" 
                 placeholder="category"
                 value={category}
-                onChange={(e) => setCategory(e.target.value)}
+                onChange={handleInput}
               >
                 
                 <option
@@ -177,7 +120,7 @@ function ProductEdit({onEditProductModalClose, id}) {
               name="name"
               value={name}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              onChange={(e) => setName(e.target.value)}
+              onChange={handleInput}
             />
           </div>
           <div className="flex flex-col mb-4">
@@ -193,7 +136,7 @@ function ProductEdit({onEditProductModalClose, id}) {
               name="description"
               value={description}
               className="border py-2 px-3 text-grey-darkest h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={handleInput}
             />
           </div>
 

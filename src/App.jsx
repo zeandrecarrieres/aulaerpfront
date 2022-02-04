@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { TransactionsContext } from "./TransactionsContext";
-
+import { ProductsContextProvider } from "./contexts/ProductsContext";
 
 
 import Header from "./components/Header";
@@ -29,8 +29,10 @@ function App() {
 
   return (
     <div>
-     
-      <TransactionsContext.Provider value={{transactions, setTransaction, transaction}}>
+      
+      <ProductsContextProvider>
+<TransactionsContext.Provider value={{ transactions, setTransaction, transaction }}>
+        
         <BrowserRouter>
           <Header />
           <div className="hidden sm:flex w-full flex-wrap md:flex-nowrap ">
@@ -50,6 +52,8 @@ function App() {
           </div>
         </BrowserRouter>
       </TransactionsContext.Provider>
+      </ProductsContextProvider>
+      
      
     </div>
   );

@@ -2,8 +2,6 @@ import React, { useState} from "react";
 import {useForm} from "react-hook-form"
 import axios from "axios";
 
-
-
 function ProductAdd({onProductModalClose}) {
   
   const { register, handleSubmit } = useForm();
