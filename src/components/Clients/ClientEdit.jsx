@@ -1,92 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useClient } from "./ClientEdit/useClient"
 import axios from "axios";
 
-function ClientEdit({ onEditClientModalClose, id }) {
-  const [type, setType] = useState("");
-  const [category, setCategory] = useState("");
-  // const [nick, setNick] = useState("");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [telephone, setTelephone] = useState("");
-  const [address, setAddress] = useState("");
-  const [complement, setComplement] = useState("");
-  const [district, setDistrict] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [postal, setPostal] = useState("");
-  const [cnp, setCnp] = useState("");
-  const [inscription, setInscription] = useState("");
-  const [site, setSite] = useState("");
+function ClientEdit(props) {
+  const { handleInput, client, registerClient } = useClient(props);
 
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_URL_API}/clients/` + id) //trocar o id por: products._id
-      .then((response) => response.json())
-      .then((data) => {
-        setType(data.type);
-        setCategory(data.category);
-        setName(data.name);
-        setEmail(data.email);
-        setTelephone(data.telephone);
-        setAddress(data.address);
-        setComplement(data.complement);
-        setDistrict(data.district);
-        setCity(data.city);
-        setState(data.state);
-        setPostal(data.postal);
-        setCnp(data.cnp);
-        setEmail(data.emnail);
-        setInscription(data.inscription);
-        setSite(data.site);
-      });
-  },[id]);
-
-  const registerClient = (e) => {
-    e.preventDefault();
-    axios({
-      method: "put",
-      url: `${process.env.REACT_APP_URL_API}/clients/` + id,
-      data: {
-        type,
-        category,
-        name,
-        email,
-        telephone,
-        address,
-        complement,
-        district,
-        city,
-        state,
-        postal,
-        cnp,
-        inscription,
-        site,
-      },
-    })
-      .then(function (reponse) {
-        //On traite la suite une fois la réponse obtenue
-        alert("Cliente Atualizado com sucesso!");
-        setName("");
-        setEmail("");
-        setTelephone("");
-        setAddress("");
-        setComplement("");
-        setDistrict("");
-        setCity("");
-        setState("");
-        setPostal("");
-        setCnp("");
-        setEmail("");
-        setInscription("");
-        setSite("");
-
-        onEditClientModalClose();
-      })
-      .catch(function (erreur) {
-        //On traite ici les erreurs éventuellement survenues
-        alert("Preencha todos os campos!");
-        console.log(erreur);
-      });
-  };
+  const {type, category, name, email, telephone, address, complement, district, city, state, postal, cnp, inscription, site } = client;
 
   return (
     <div>
@@ -113,7 +32,7 @@ function ClientEdit({ onEditClientModalClose, id }) {
                 className="border py-2 px-3 text-grey-darkest h-10 my-2 shadow-sm bg-opacity-30 px-2 text-sm border-solid border-gray-300"
                 placeholder="category"
                 value={type}
-                onChange={(e) => setType(e.target.value)}
+                onChange={handleInput}
               >
                 <option value="initial" className="flex flex-col mb-4">
                   -- Selecione uma opção --
@@ -148,7 +67,7 @@ function ClientEdit({ onEditClientModalClose, id }) {
               className="border py-2 px-3 text-grey-darkest h-10 my-2 shadow-sm bg-opacity-30 px-2 text-sm border-solid border-gray-300"
               placeholder="category"
               value={category}
-              onChange={(e) => setCategory(e.target.value)}
+              onChange={handleInput}
             >
               <option value="" className="flex flex-col mb-4 ">
                 -- Selecione uma opção --
@@ -180,7 +99,7 @@ function ClientEdit({ onEditClientModalClose, id }) {
               name="name"
               value={name}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              onChange={(e) => setName(e.target.value)}
+              onChange={handleInput}
             />
           </div>
 
@@ -194,7 +113,7 @@ function ClientEdit({ onEditClientModalClose, id }) {
               name="email"
               value={email}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleInput}
             />
           </div>
 
@@ -211,7 +130,7 @@ function ClientEdit({ onEditClientModalClose, id }) {
               name="telephone"
               value={telephone}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              onChange={(e) => setTelephone(e.target.value)}
+              onChange={handleInput}
             />
           </div>
 
@@ -228,7 +147,7 @@ function ClientEdit({ onEditClientModalClose, id }) {
               name="address"
               value={address}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              onChange={(e) => setAddress(e.target.value)}
+              onChange={handleInput}
             />
           </div>
 
@@ -245,7 +164,7 @@ function ClientEdit({ onEditClientModalClose, id }) {
               name="complement"
               value={complement}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              onChange={(e) => setComplement(e.target.value)}
+              onChange={handleInput}
             />
           </div>
 
@@ -262,7 +181,7 @@ function ClientEdit({ onEditClientModalClose, id }) {
               name="district"
               value={district}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              onChange={(e) => setDistrict(e.target.value)}
+              onChange={handleInput}
             />
           </div>
 
@@ -276,7 +195,7 @@ function ClientEdit({ onEditClientModalClose, id }) {
               name="city"
               value={city}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              onChange={(e) => setCity(e.target.value)}
+              onChange={handleInput}
             />
           </div>
 
@@ -294,7 +213,7 @@ function ClientEdit({ onEditClientModalClose, id }) {
                 name="state"
                 value={state}
                 className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-                onChange={(e) => setState(e.target.value)}
+                onChange={handleInput}
               />
             </div>
 
@@ -311,7 +230,7 @@ function ClientEdit({ onEditClientModalClose, id }) {
                 name="postal"
                 value={postal}
                 className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-                onChange={(e) => setPostal(e.target.value)}
+                onChange={handleInput}
               />
             </div>
           </div>
@@ -326,7 +245,7 @@ function ClientEdit({ onEditClientModalClose, id }) {
               name="cnp"
               value={cnp}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              onChange={(e) => setCnp(e.target.value)}
+              onChange={handleInput}
             />
           </div>
 
@@ -344,7 +263,7 @@ function ClientEdit({ onEditClientModalClose, id }) {
                 name="inscription"
                 value={inscription}
                 className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-                onChange={(e) => setInscription(e.target.value)}
+                onChange={handleInput}
               />
             </div>
           ) : null}
@@ -363,7 +282,7 @@ function ClientEdit({ onEditClientModalClose, id }) {
                 name="site"
                 value={site}
                 className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-                onChange={(e) => setSite(e.target.value)}
+                onChange={handleInput}
               />
             </div>
           ) : null}

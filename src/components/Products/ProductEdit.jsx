@@ -1,19 +1,9 @@
-import { useProduct } from "./ProductEdit/useProduct"
+import { useProduct } from "./ProductEdit/useProduct";
 
 function ProductEdit(props) {
-  // const [products, setProducts] = useState([]);
-  //const [code, setCode] = useState("");
-  //const [category, setCategory] = useState("");
-  //const [name, setName] = useState("");
-  //const [description, setDescription] = useState("");
-  //const [qtde, setQtde] = useState("");
-  //const [purchase_price, setPurchase_price] = useState("");
-  //const [reference_price, setReference_price] = useState("");
-  // const [selectedOption,setSelectedOption] = useState("")
-
   const { handleInput, product, registerProduct } = useProduct(props);
 
-  const { name, description, category } = product;
+  const { category, name, description } = product;
 
   return (
     <div>
@@ -23,42 +13,10 @@ function ProductEdit(props) {
           className="grid-cols-2 grid-template-columns: repeat(2, minmax(0, 1fr)); items-center justify-center"
           onSubmit={registerProduct}
         >
-          <div className="text-xl mb-8 text-gray-500">
-            Edição de Produto
-          </div>
+          <div className="text-xl mb-8 text-gray-500">Edição de Produto</div>
 
           <div className="flex justify-between ">
-            {/* <div className="flex flex-col mb-4">
-              <label
-                htmlFor="code"
-                className=" font-medium text-sm text-gray-500 "
-              >
-                Código
-              </label>
-              <input
-                type="text"
-                id="code"
-                name="code"
-                value={code}
-                className="border py-2 px-3 text-grey-darkest w-full h-10 my-2 shadow-sm bg-opacity-30 border-solid border-gray-300"
-                onChange={(e) => setCode(e.target.value)}
-              />
-            </div> */}
             <div className="flex flex-col mb-4">
-              {/* <label
-                htmlFor="category"
-                className=" font-medium text-sm text-gray-500 w-64"
-              >
-                Categoria
-              </label>
-              <input
-                type="text"
-                id="category"
-                name="category"
-                value={category}
-                className="border py-2 px-3 text-grey-darkest w-full h-10 my-2 shadow-sm bg-opacity-30 px-2"
-                onChange={(e) => setCategory(e.target.value)}
-              /> */}
               <label
                 htmlFor="category"
                 className=" font-medium text-sm text-gray-500"
@@ -67,42 +25,23 @@ function ProductEdit(props) {
               </label>
               <select
                 id="options-select"
-                className="border py-2 px-3 text-grey-darkest h-10 my-2 shadow-sm bg-opacity-30 px-2 text-sm border-solid border-gray-300" 
+                className="border py-2 px-3 text-grey-darkest h-10 my-2 shadow-sm bg-opacity-30 px-2 text-sm border-solid border-gray-300"
                 placeholder="category"
                 value={category}
                 onChange={handleInput}
               >
-                
-                <option
-                  value="Ovo Branco"
-                  // name="Física"
-                  className="flex flex-col mb-4"
-                >
+                <option value="Ovo Branco" className="flex flex-col mb-4">
                   Ovo Branco
                 </option>
-                <option
-                  value="Ovo Vermelho"
-                  // name="Física"
-                  className="flex flex-col mb-4"
-                >
+                <option value="Ovo Vermelho" className="flex flex-col mb-4">
                   Ovo Vermelho
                 </option>
-                <option
-                  value="Caixa Vazia"
-                  // name="Física"
-                  className="flex flex-col mb-4"
-                >
+                <option value="Caixa Vazia" className="flex flex-col mb-4">
                   Caixa Vazia
                 </option>
-                <option
-                  value="Bandeja Vazia"
-                  // name="Física"
-                  className="flex flex-col mb-4"
-                >
+                <option value="Bandeja Vazia" className="flex flex-col mb-4">
                   Bandeja Vazia
                 </option>
-               
-              
               </select>
             </div>
           </div>
@@ -140,57 +79,6 @@ function ProductEdit(props) {
             />
           </div>
 
-          {/* <div className="flex justify-between gap-3">
-            <div className="flex flex-col mb-4">
-              <label
-                htmlFor="purchase_price"
-                className=" font-medium text-sm text-gray-500"
-              >
-                Qtde Estoque
-              </label>
-              <input
-                type="text"
-                id="qtde"
-                name="qtde"
-                value={qtde}
-                className="border py-2 px-3 text-grey-darkes h-10 my-2 shadow-sm bg-opacity-30 px-2	w-full border-solid border-gray-300"
-                onChange={(e) => setQtde(e.target.value)}
-              />
-            </div>
-            <div className="flex flex-col mb-4">
-              <label
-                htmlFor="purchase_price"
-                className=" font-medium text-sm text-gray-500"
-              >
-                Preço de Compra
-              </label>
-              <input
-                type="text"
-                id="purchase_price"
-                name="purchase_price"
-                value={purchase_price}
-                className="border py-2 px-3 text-grey-darkes h-10 my-2 shadow-sm bg-opacity-30 px-2	w-full border-solid border-gray-300"
-                onChange={(e) => setPurchase_price(e.target.value)}
-              />
-            </div>
-            <div className="flex flex-col mb-4">
-              <label
-                htmlFor="reference_price"
-                className=" font-medium text-sm text-gray-500"
-              >
-                Preço de Venda
-              </label>
-              <input
-                type="text"
-                id="reference_price"
-                name="reference_price"
-                value={reference_price}
-                className="border py-2 px-3 text-grey-darkest h-10 my-2 shadow-sm bg-opacity-30 px-2 w-full border-solid border-gray-300"
-                onChange={(e) => setReference_price(e.target.value)}
-              />
-            </div>
-          </div> */}
-
           <button className="px-5 py-3 bg-red-700 text-white hover:bg-red-600 text-white  text-base mx-auto p-4 rounded w-full sm:w-auto">
             Atualizar
           </button>
@@ -198,8 +86,6 @@ function ProductEdit(props) {
 
         <div></div>
       </div>
-      
-
     </div>
   );
 }

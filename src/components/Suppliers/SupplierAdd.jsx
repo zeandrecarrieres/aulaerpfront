@@ -1,28 +1,26 @@
 import React, { useState } from "react";
-import {useForm} from "react-hook-form"
+import { useForm } from "react-hook-form";
 import axios from "axios";
 
-function SuppliersAdd({onSupplierModalClose}) {
+function SuppliersAdd({ onSupplierModalClose }) {
+  const { register, handleSubmit } = useForm();
 
-  const { register, handleSubmit } = useForm()
-  // const [type, setType] = useState("");
-  // const [category, setCategory] = useState("");
-  // // const [nick, setNick] = useState("");
-  // const [name, setName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [telephone, setTelephone] = useState("");
-  // const [address, setAddress] = useState("");
-  // const [complement, setComplement] = useState("");
-  // const [district, setDistrict] = useState("");
-  // const [city, setCity] = useState("");
-  // const [state, setState] = useState("");
-  // const [postal, setPostal] = useState("");
-  // const [cnp, setCnp] = useState("");
-  // const [inscription, setInscription] = useState("");
-  // const [site, setSite] = useState("");
-
-  const registerSupplier = ({ type, category, name, email, telephone,address, complement, district, city, state, postal, cnp, inscription, site}) => {
-    // e.preventDefault();
+  const registerSupplier = ({
+    type,
+    category,
+    name,
+    email,
+    telephone,
+    address,
+    complement,
+    district,
+    city,
+    state,
+    postal,
+    cnp,
+    inscription,
+    site,
+  }) => {
     axios({
       method: "post",
       url: `${process.env.REACT_APP_URL_API}/suppliers`,
@@ -45,32 +43,11 @@ function SuppliersAdd({onSupplierModalClose}) {
       },
     })
       .then(function (reponse) {
-        //On traite la suite une fois la réponse obtenue
         alert("Fornecedor Cadastrado com sucesso!");
 
-        // setType('')
-        // setCategory('')
-        // setName('')
-        // setEmail('')
-        // setTelephone('')
-        // setAddress('')
-        // setComplement('')
-        // setDistrict('')
-        // setCity('')
-        // setState('')
-        // setPostal('')
-        // setCnp('')
-        // setEmail('')
-        // setInscription('')
-        // setSite('')
-
-
-        onSupplierModalClose()
-
-
+        onSupplierModalClose();
       })
       .catch(function (erreur) {
-        //On traite ici les erreurs éventuellement survenues
         console.log(erreur);
         alert("Preencha todos os campos!");
       });
@@ -89,23 +66,6 @@ function SuppliersAdd({onSupplierModalClose}) {
           </div>
 
           <div className="flex justify-between">
-            {/* <div className="flex flex-col mb-4">
-              <label
-                htmlFor="type"
-                className="font-bold text-sm text-gray-500"
-              >
-                Tipo
-              </label>
-              <input
-                type="text"
-                id="type"
-                name="type"
-                value={type}
-                className="border py-2 px-3 text-grey-darkest w-full h-10 my-2 shadow-sm bg-opacity-30 border-solid border-gray-300"
-                onChange={(e) => setType(e.target.value)}
-              />
-            </div> */}
-
             <div className="flex flex-col mb-4">
               <label
                 htmlFor="category"
@@ -114,9 +74,9 @@ function SuppliersAdd({onSupplierModalClose}) {
                 Categoria
               </label>
               <select
-               className="border py-2 px-3 text-grey-darkest h-10 my-2 shadow-sm bg-opacity-30 px-2 text-sm border-solid border-gray-300"
+                className="border py-2 px-3 text-grey-darkest h-10 my-2 shadow-sm bg-opacity-30 px-2 text-sm border-solid border-gray-300"
                 placeholder="category"
-                {...register('category')}
+                {...register("category")}
               >
                 <option value="" className="flex flex-col mb-4">
                   -- Selecione uma opção --
@@ -140,35 +100,24 @@ function SuppliersAdd({onSupplierModalClose}) {
           </div>
 
           <div className="flex flex-col mb-4">
-            <label
-              htmlFor="nick"
-              className="font-bold text-sm text-gray-500"
-            >
-              {/* verificar antes era sem aspsas */}
-              {'category' === "Fisica" ? "NOME" : "Razão Social"} 
+            <label htmlFor="nick" className="font-bold text-sm text-gray-500">
+              {"category" === "Fisica" ? "NOME" : "Razão Social"}
             </label>
             <input
               type="text"
-              //antes sem aspas
-              // value={'name'}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-             {...register('name')}
+              {...register("name")}
             />
           </div>
 
           <div className="flex flex-col mb-4">
-            <label
-              htmlFor="email"
-              className="font-bold text-sm text-gray-500"
-            >
+            <label htmlFor="email" className="font-bold text-sm text-gray-500">
               Email
             </label>
             <input
               type="text"
-            //  antes sem aspas
-              // value={'email'}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              {...register('email')}
+              {...register("email")}
             />
           </div>
 
@@ -181,9 +130,8 @@ function SuppliersAdd({onSupplierModalClose}) {
             </label>
             <input
               type="text"
-              // value={'telephone'}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              {...register('telephone')}
+              {...register("telephone")}
             />
           </div>
 
@@ -196,10 +144,8 @@ function SuppliersAdd({onSupplierModalClose}) {
             </label>
             <input
               type="text"
-              
-              // value={'address'}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              {...register('address')}
+              {...register("address")}
             />
           </div>
 
@@ -212,10 +158,8 @@ function SuppliersAdd({onSupplierModalClose}) {
             </label>
             <input
               type="text"
-              
-              // value={'complement'}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              {...register('complement')}
+              {...register("complement")}
             />
           </div>
 
@@ -228,26 +172,19 @@ function SuppliersAdd({onSupplierModalClose}) {
             </label>
             <input
               type="text"
-             
-              // value={'district'}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              {...register('district')}
+              {...register("district")}
             />
           </div>
 
           <div className="flex flex-col mb-4">
-            <label
-              htmlFor="city"
-              className="font-bold text-sm text-gray-500"
-            >
+            <label htmlFor="city" className="font-bold text-sm text-gray-500">
               Cidade
             </label>
             <input
               type="text"
-              
-              // value={'city'}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              {...register('city')}
+              {...register("city")}
             />
           </div>
 
@@ -261,10 +198,8 @@ function SuppliersAdd({onSupplierModalClose}) {
               </label>
               <input
                 type="text"
-               
-                // value={'state'}
                 className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-                {...register('state')}
+                {...register("state")}
               />
             </div>
 
@@ -277,31 +212,24 @@ function SuppliersAdd({onSupplierModalClose}) {
               </label>
               <input
                 type="text"
-              
-                // value={'postal'}
                 className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-                {...register('postal')}
+                {...register("postal")}
               />
             </div>
           </div>
 
           <div className="flex flex-col mb-4">
-            <label
-              htmlFor="cnp"
-              className="font-bold text-sm text-gray-500"
-            >
-              {'category' === "Fisica" ? "CPF" : "CNPJ"}
+            <label htmlFor="cnp" className="font-bold text-sm text-gray-500">
+              {"category" === "Fisica" ? "CPF" : "CNPJ"}
             </label>
             <input
               type="text"
-             
-              // value={'cnp'}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              {...register('cnp')}
+              {...register("cnp")}
             />
           </div>
 
-          {'category' === "Juridica" ? (
+          {"category" === "Juridica" ? (
             <div className="flex flex-col mb-4">
               <label
                 htmlFor="inscription"
@@ -311,27 +239,20 @@ function SuppliersAdd({onSupplierModalClose}) {
               </label>
               <input
                 type="text"
-              
-                // value={'inscription'}
                 className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-                {...register('inscription')}
+                {...register("inscription")}
               />
             </div>
           ) : null}
 
           <div className="flex flex-col mb-4">
-            <label
-              htmlFor="site"
-              className="font-bold text-sm text-gray-500"
-            >
+            <label htmlFor="site" className="font-bold text-sm text-gray-500">
               Site
             </label>
             <input
               type="text"
-            
-              // value={'site'}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              {...register('site')}
+              {...register("site")}
             />
           </div>
 

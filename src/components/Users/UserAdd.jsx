@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import axios from "axios";
 
-function UserAdd({onUserModalClose}) {
-  const [type, setType] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [telephone, setTelephone] = useState("");
+function UserAdd({ onUserModalClose }) {
+  const { register, handleSubmit } = useForm();
 
-  const registerUser = (e) => {
-    e.preventDefault();
+  const registerUser = ({
+    type,
+    username,
+    name,
+    email,
+    telephone,
+    password,
+  }) => {
     axios({
       method: "post",
       url: `${process.env.REACT_APP_URL_API}/users`,
@@ -24,19 +25,11 @@ function UserAdd({onUserModalClose}) {
       },
     })
       .then(function (reponse) {
-        //On traite la suite une fois la réponse obtenue
         alert("Usuário Cadastrado com sucesso!");
-        setType("");
-        setName("");
-        setEmail("");
-        setTelephone("");
-        setUsername("");
-        setPassword("");
 
-        onUserModalClose()
+        onUserModalClose();
       })
       .catch(function (erreur) {
-        //On traite ici les erreurs éventuellement survenues
         console.log(erreur);
         alert("Preencha todos os campos!");
       });
@@ -48,11 +41,9 @@ function UserAdd({onUserModalClose}) {
         <form
           action="#"
           className="grid-cols-2 grid-template-columns: repeat(2, minmax(0, 1fr)); items-center justify-center"
-          onSubmit={registerUser}
+          onSubmit={handleSubmit(registerUser)}
         >
-          <div className="text-xl mb-8 text-gray-500">
-            Inclusão de Usuários
-          </div>
+          <div className="text-xl mb-8 text-gray-500">Inclusão de Usuários</div>
 
           <div className="flex justify-between">
             <div className="flex flex-col mb-4">
@@ -63,10 +54,9 @@ function UserAdd({onUserModalClose}) {
                 Tipo
               </label>
               <select
-                id="options-select"
                 className="border py-2 px-3 text-grey-darkest h-10 my-2 shadow-sm bg-opacity-30 px-2 text-sm border-solid border-gray-300"
                 placeholder="category"
-                onChange={(e) => setType(e.target.value)}
+                {...register("category")}
               >
                 <option value="initial" className="flex flex-col mb-4">
                   -- Selecione uma opção --
@@ -82,36 +72,24 @@ function UserAdd({onUserModalClose}) {
           </div>
 
           <div className="flex flex-col mb-4">
-            <label
-              htmlFor="name"
-              className="font-bold text-sm text-gray-500"
-            >
+            <label htmlFor="name" className="font-bold text-sm text-gray-500">
               Nome
             </label>
             <input
               type="text"
-              id="name"
-              name="name"
-              value={name}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              onChange={(e) => setName(e.target.value)}
+              {...register("name")}
             />
           </div>
 
           <div className="flex flex-col mb-4">
-            <label
-              htmlFor="email"
-              className="font-bold text-sm text-gray-500"
-            >
+            <label htmlFor="email" className="font-bold text-sm text-gray-500">
               Email
             </label>
             <input
               type="text"
-              id="email"
-              name="email"
-              value={email}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              onChange={(e) => setEmail(e.target.value)}
+              {...register("email")}
             />
           </div>
 
@@ -124,11 +102,8 @@ function UserAdd({onUserModalClose}) {
             </label>
             <input
               type="text"
-              id="telephone"
-              name="telephone"
-              value={telephone}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              onChange={(e) => setTelephone(e.target.value)}
+              {...register("telephone")}
             />
           </div>
 
@@ -141,11 +116,8 @@ function UserAdd({onUserModalClose}) {
             </label>
             <input
               type="text"
-              id="username"
-              name="username"
-              value={username}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              onChange={(e) => setUsername(e.target.value)}
+              {...register("username")}
             />
           </div>
 
@@ -158,11 +130,8 @@ function UserAdd({onUserModalClose}) {
             </label>
             <input
               type="password"
-              id="password"
-              name="password"
-              value={password}
               className="border py-2 px-3 text-grey-darkest    h-10 my-2 shadow-sm bg-opacity-30 px-2 border-solid border-gray-300"
-              onChange={(e) => setPassword(e.target.value)}
+              {...register("password")}
             />
           </div>
 
