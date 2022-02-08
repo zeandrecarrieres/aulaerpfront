@@ -1,7 +1,11 @@
 import React from "react";
 import { Delete, Edit } from "@material-ui/icons";
+import { EditUserModal } from './EditUserModal'
+import { useModal } from "../../hooks/useModal";
 
 function UsersLine({ users }) {
+  const { isModalOpen, openModal, closeModal } = useModal();
+
   const deleteUser = async () => {
     await fetch(`${process.env.REACT_APP_URL_API}/users/` + users._id, {
       method: "DELETE",
@@ -21,7 +25,7 @@ function UsersLine({ users }) {
             <td className="w-1/12 border">{users.email}</td>
             <td className="w-1/12 px-12 border">{users.telephone}</td>
             <td className="w-1/12 px-20 border text-yellow-700 hover:text-yellow-500">
-              <button>
+              <button onClick={openModal}>
                 <Edit />
               </button>
             </td>
@@ -33,6 +37,13 @@ function UsersLine({ users }) {
           </tr>
         </tbody>
       </table>
+
+      <EditUserModal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        id={users._id}
+      />
+
     </>
   );
 }

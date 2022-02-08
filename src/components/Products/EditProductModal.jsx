@@ -7,9 +7,7 @@ export function EditProductModal({isOpen, onRequestClose, id}) {
         isOpen={isOpen}
         onRequestClose={onRequestClose}
        
-         
-        // id={product._id}
-        // contentLabel="Example Modal"
+        
       >
         <ProductEdit onEditProductModalClose={onRequestClose} id={id} />
       </Modal>
